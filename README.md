@@ -1,4 +1,5 @@
 # Simple React DApp in TypeScript.
+: This is a simple DApp for local Cosmos-SDK blockchain.
 
 ## How to Start
 - run the `cosmwasm/wasmd` image in Docker, using `cosmojs` (https://github.com/cosmos/cosmjs). In `scripts/wasmd`, you can find `start.sh` that can start local Cosmos-SDK blockchain in a Docker.
