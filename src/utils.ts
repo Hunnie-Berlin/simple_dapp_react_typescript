@@ -7,6 +7,16 @@ import {
 
 const URL = "http://localhost:1317";
 
+const faucet = {
+  mnemonic:
+    "economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone",
+  pubkey: {
+    type: "tendermint/PubKeySecp256k1",
+    value: "A08EGB7ro1ORuFhjOnZcSgwYlpe0DSFjVNUIkNNQxwKQ",
+  },
+  address: "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+};
+
 export const getClientBalance = async (
   mnemonic: string | null,
   fromAddress: string | null
@@ -69,4 +79,21 @@ export const makeTx = async (
     .map((item) => item.amount);
   const txID = makeSignAndBroadcast.transactionHash;
   return [ucosmBalance ? ucosmBalance[0] : "0", txID];
+};
+
+export const searchTxByID = async (searchTerm: string) => {
+  const wallet = await Secp256k1HdWallet.fromMnemonic(faucet.mnemonic);
+  const client = new SigningCosmosClient(URL, faucet.address, wallet);
+  const result = await client.searchTx({
+    id: searchTerm,
+  });
+  const cleanedResult = {
+    hash: result[0].hash,
+    height: result[0].height,
+    timeStamp: result[0].timestamp,
+    fromAddress: result[0].tx.value.msg[0].value.from_address,
+    toAddress: result[0].tx.value.msg[0].value.to_address,
+    amount: result[0].tx.value.msg[0].value.amount[0].amount,
+  };
+  return cleanedResult;
 };

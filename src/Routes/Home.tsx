@@ -1,4 +1,10 @@
-import React, { useState, useRef, ChangeEvent, KeyboardEvent } from "react";
+import React, {
+  useState,
+  useRef,
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+} from "react";
 import styled from "styled-components";
 import { getClientBalance, makeTx } from "../utils";
 
@@ -184,7 +190,7 @@ const Home = (props: IProps) => {
     }
   };
 
-  const onClick = (e?: React.MouseEvent<HTMLElement>) => {
+  const onClick = (e?: MouseEvent<HTMLElement>) => {
     if (!isUserInfo) {
       if (mnemonic === "" || senderAddress === "") {
         setError("Please enter entire information.");

@@ -15,7 +15,7 @@ const Header = styled.header`
   align-items: center;
   justify-content: center;
   padding: 0 10px;
-  background-color: #0b3687;
+  background-color: #072a6a;
   z-index: 10;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.8);
 `;
